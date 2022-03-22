@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "service-image"
+version = "0.1.0"
+description = "A project for test task"
+authors = ["Yaroslav Basargin"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Flask = "^2.0.3"
+
+[tool.poetry.dev-dependencies]
+

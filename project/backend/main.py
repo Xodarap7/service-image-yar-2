@@ -1,11 +1,14 @@
-from flask import Flask
+from flask import Flask, request
+import logging
 
 app = Flask(__name__)
+logger = logging.getLogger()
 
 
-@app.route('/')
+@app.route('/sendImage', methods=['POST'])
 def hello_world():
-    return "<h1>Hello, World!<h1>"
+    req = request.form.get()
+    logger.debug(f'{req}___________________________________')
 
 
 if __name__ == '__main__':

@@ -1,18 +1,14 @@
-FROM node:17.0-buster-slim
+FROM node:12.8.0-alpine
 
 WORKDIR /app
 
-#ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH /app/node_modules/.bin:$PATH
 
 COPY ./package*.json ./
 
 RUN npm ci
 
-RUN npm install axios --save
-
-RUN npm audit fix --force
-
-COPY . .
+RUN npm install react-scripts@4.0.3 -g --silent
 
 EXPOSE 3000
 

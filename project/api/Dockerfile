@@ -21,7 +21,7 @@ RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-
 RUN pip install --upgrade pip
 
 # Copy poetry.lock* in case it doesn't exist in the repo
-COPY ./backend/pyproject.toml ./backend/poetry.lock* ./
+COPY pyproject.toml ./backend/poetry.lock* ./
 
 # Allow installing dev dependencies to run tests
 ARG INSTALL_DEV=true
@@ -32,7 +32,7 @@ RUN useradd -u "$HOST_UID" -U -s /bin/false username \
     && chown -R username /app
 USER username
 
-COPY . .
+COPY .. .
 ENV PYTHONPATH=/app
 
 ENTRYPOINT ["python", "/app/main.py"]

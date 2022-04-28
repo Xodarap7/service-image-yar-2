@@ -25,12 +25,12 @@ def create_app(script_info=None):
     file_upload.init_app(app, db)
 
     # register blueprints
-    from project.backend.image import image_blueprint
+    from project.api.image import image_blueprint
 
     app.register_blueprint(image_blueprint)
 
     # register api
-    from project.backend import main
+    from project.api import main
 
     main.init_app(app)
 

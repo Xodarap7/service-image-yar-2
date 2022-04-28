@@ -8,6 +8,10 @@ COPY ./package*.json ./
 
 RUN npm ci
 
+RUN npm install axios --save
+
+RUN npm audit fix --force
+
 COPY . .
 
 EXPOSE 3000

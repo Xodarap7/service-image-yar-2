@@ -4,12 +4,13 @@ services:
   backend:
     build:
       context: ./project
-      dockerfile: Dockerfile.backend
 
     volumes:
       - "./project/backend:/app"
     ports:
       - "5000:5000"
+    env_file:
+      - .env
 
   frontend:
     build:
@@ -22,3 +23,21 @@ services:
       - "3000:3000"
     depends_on:
       - backend
+
+  db:
+    build:
+      context: ./project/db
+
+    volumes:
+      - "./project/frontend:/app"
+
+    expose:
+      - 5432
+
+    env_file:
+      - ./.env
+    depends_on:
+      - backend
+
+
+

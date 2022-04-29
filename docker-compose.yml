@@ -3,27 +3,14 @@ version: "3.8"
 services:
   app:
     build:
-      context: ./project/api
+      context: ./project
     entrypoint: ['/app/entrypoint.sh']
     volumes:
       - .:/app
     ports:
-      - "5000:5000"
+      - 5001:5000
     env_file:
       - .env
-
-  frontend:
-    build:
-      context: ./frontend
-
-    volumes:
-      - "./frontend:/app"
-      - "/app/node_modules"
-    ports:
-      - "3000:3000"
-    depends_on:
-      - app
-
 
   db:
     build:
@@ -36,6 +23,19 @@ services:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
 
+  frontend:
+    build:
+      context: ./frontend
 
+    volumes:
+      - "./frontend:/app"
+      - "/app/node_modules"
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - REACT_APP_USERS_SERVICE_URL=${REACT_APP_USERS_SERVICE_URL}
+    depends_on:
+      - app
 
 

@@ -2,7 +2,7 @@ import React from 'react';
 
 const AddImage = (props) => {
   return (
-    <form onSubmit={(event) => props.addUser(event)}>
+    <form className='text-center bottom50px' onSubmit={(event) => props.addUser(event)}>
       <input
         name="image"
         type="file"

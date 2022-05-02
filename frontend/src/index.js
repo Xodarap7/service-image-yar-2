@@ -55,37 +55,44 @@ class App extends Component {
       <section className="section">
         <div className="container">
           <div className="columns">
-            <div className="column is-full">
-              <AddImage
-                  image={this.state.image}
-                  addUser={this.addImage}
-                  handleChange={this.handleChange}
-              />
-              {
-                this.state.images.map((img) => {
-                  return (
-                    <div className='container-images'>
-                      <div className="box" key={img.id}>
+            <div className='form-upload-container'>
+              <div className='border-1px-solid'>
 
-                        <div className="media-content">
-                          <figure className="image is-64x64">
-                            <img src={img.negative_url} alt="Img" />
-                          </figure>
-                        </div>
-                        <div className="media-content">
-                          <figure className="image is-64x64">
-                            <img src={img.original_url} alt="Img" />
-                          </figure>
-                        </div>
+                <h2 className='text-center'>Выберите изображение для загрузки</h2>
+                <AddImage
+                    image={this.state.image}
+                    addUser={this.addImage}
+                    handleChange={this.handleChange}
+                />
+              </div>
 
-                      </div>
-                    </div>
-                  )
-                })
-              }
-
+              <h2 className='margin-top50 text-center'>Последние 3 преобразования:</h2>
             </div>
+            {
+              this.state.images.map((img) => {
+                return (
+                  <div className='container-images'>
+                    <div className="box" key={img.id}>
+
+                      <div className="media-content">
+                        <figure className="image is-64x64">
+                          <img src={img.negative_url} alt="Img" />
+                        </figure>
+                      </div>
+                      <div className="media-content">
+                        <figure className="image is-64x64">
+                          <img src={img.original_url} alt="Img" />
+                        </figure>
+                      </div>
+
+                    </div>
+                  </div>
+                )
+              })
+            }
+
           </div>
+          
         </div>
       </section>
     )

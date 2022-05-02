@@ -12,7 +12,6 @@ from project import file_upload
 from project.api.models import Image
 
 image_blueprint = Blueprint("image", __name__)
-
 images_namespace = Namespace("", description="Images operations")
 
 img = images_namespace.model(
@@ -30,17 +29,16 @@ parser.add_argument("file", location="files", type=FileStorage, required=True)
 
 def create_negative(original):
     orig_filename = f"orig_{original.filename}"
-    gray_filename = f"gray_{original.filename}"
+    negative_filename = f"negative_{original.filename}"
 
     img_as_np = np.frombuffer(original.read(), dtype=np.uint8)
     orig_img = cv2.imdecode(img_as_np, cv2.IMREAD_COLOR)
     negative_img = cv2.bitwise_not(orig_img)
 
-
-    cv2.imwrite(gray_filename, negative_img)
+    cv2.imwrite(negative_filename, negative_img)
     cv2.imwrite(orig_filename, orig_img)
 
-    return orig_filename, gray_filename
+    return orig_filename, negative_filename
 
 
 def create_file_storage(filename, name, content_type):
@@ -60,13 +58,13 @@ class ImageList(Resource):
     def post(self):
         image = Image()
         original = request.files["original"]
-        name = f"gray_{original.name}"
+        name = f"negative_{original.name}"
 
-        orig_filename, gray_filename = create_negative(original)
+        orig_filename, negative_filename = create_negative(original)
         original = create_file_storage(
             orig_filename, original.name, original.content_type
         )
-        negative = create_file_storage(gray_filename, name, original.content_type)
+        negative = create_file_storage(negative_filename, name, original.content_type)
 
         file_upload.save_files(
             image, files={"original": original, "negative": negative}

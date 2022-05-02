@@ -56,20 +56,17 @@ class App extends Component {
         <div className="container">
           <div className="columns">
             <div className="column is-full">
-              <br/>
-              <h1 className="title is-1">Images</h1>
-              <hr/><br/>
               <AddImage
                   image={this.state.image}
                   addUser={this.addImage}
                   handleChange={this.handleChange}
               />
-              <br/><br/>
-            {
-              this.state.images.map((img) => {
-                return (
-                    <div className="box" key={img.id}>
-                      <article className="media">
+              {
+                this.state.images.map((img) => {
+                  return (
+                    <div className='container-images'>
+                      <div className="box" key={img.id}>
+
                         <div className="media-content">
                           <figure className="image is-64x64">
                             <img src={img.negative_url} alt="Img" />
@@ -80,11 +77,12 @@ class App extends Component {
                             <img src={img.original_url} alt="Img" />
                           </figure>
                         </div>
-                      </article>
+
+                      </div>
                     </div>
-                )
-              })
-            }
+                  )
+                })
+              }
 
             </div>
           </div>

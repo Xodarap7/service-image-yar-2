@@ -28,8 +28,7 @@ class App extends Component {
 
 
   getImages() {
-    axios.get(`http://localhost:5000/image`)
-    // axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/image`)
+    axios.get(`${process.env.REACT_APP_USERS_SERVICE_URL}/image`)
         .then((res) => { this.setState({ images: res.data }); })
         .catch((err) => {
           console.log(err);
@@ -37,15 +36,11 @@ class App extends Component {
   };
   addImage(event) {
     event.preventDefault();
-    // const data = {original: this.state.image}
-    // console.log(data)
     const formData = new FormData();
-    formData.append("file", this.state.image);///?
-    console.log("form data", formData);
+    formData.append("original", this.state.image);
 
     axios.post(
-        // `${process.env.REACT_APP_USERS_SERVICE_URL}/image`,
-        `/image`,
+        `${process.env.REACT_APP_USERS_SERVICE_URL}/image`,
         formData,
         { headers: {"Content-Type": "multipart/form-data", "Accept": "multipart/form-data"} })
         .then((res) => {
@@ -53,8 +48,6 @@ class App extends Component {
           this.setState({ image: ""})
         })
         .catch((err) => { console.log(err); });
-
-
   };
 
   render() {
@@ -92,6 +85,7 @@ class App extends Component {
                 )
               })
             }
+
             </div>
           </div>
         </div>
@@ -104,3 +98,4 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
+

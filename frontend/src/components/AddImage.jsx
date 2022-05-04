@@ -12,7 +12,6 @@ const AddImage = (props) => {
       />
       <input
         type="submit"
-        className="button is-primary is-large is-fullwidth"
         value="Submit"
       />
     </form>
